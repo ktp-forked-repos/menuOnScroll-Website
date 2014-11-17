@@ -1,0 +1,17 @@
+{
+  "name": "auto-scroll-menu",
+  "version": "1.0.0",
+  "authors": [
+    "Khoa Pham <khoa.pham@me.com>"
+  ],
+  "license": "MIT",
+  "homepage": "http://khoapham.me",
+  "ignore": [
+    "**/.*",
+    "node_modules",
+    "bower_components"
+  ],
+  "devDependencies": {
+    "jquery": "~2.1.1"
+  }
+}
