@@ -1,8 +1,25 @@
 ---
-title: Standard Middleman App
+title: jQuery Header on Scroll 
 ---
 
-<!-- Add your site or application content here -->
-  <div id="container">
-     <p> You app here </p>
-  </div> <!-- End content wrapper -->
+<div id="header">
+  <div class="inner-header clearfix">
+    <ul class="menu">
+      <li class="menu-item"><a href="#work">Work</a></li>
+      <li class="menu-item"><a href="#about-us">About Us</a></li>
+      <li class="menu-item"><a href="#contact">Contact</a></li>
+    </ul>
+  </div>
+</div>
+
+<div id="container">
+  <div id="work">
+    <%= lorem.sentences 20 %>
+  </div>
+  <div id="about-us">
+    <%= lorem.sentences 25 %>
+  </div>
+  <div id="contact">
+    <%= lorem.sentences 25 %>
+  </div>
+</div> <!-- End content wrapper -->
