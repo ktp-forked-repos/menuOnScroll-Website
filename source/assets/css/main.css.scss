@@ -3,3 +3,14 @@
    ========================================================================== */
 
 @import "bourbon";
+@import "neat";
+
+.wrap {
+  @include outer-container();
+}
+
+#container {
+  section {
+    margin: 40px 0;
+  }
+}

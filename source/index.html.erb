@@ -3,7 +3,7 @@ title: jQuery Header on Scroll
 ---
 
 <div id="header">
-  <div class="inner-header clearfix">
+  <div class="inner-header wrap clearfix">
     <ul class="menu">
       <li class="menu-item"><a href="#work">Work</a></li>
       <li class="menu-item"><a href="#about-us">About Us</a></li>
@@ -13,13 +13,19 @@ title: jQuery Header on Scroll
 </div>
 
 <div id="container">
-  <div id="work">
-    <%= lorem.sentences 20 %>
-  </div>
-  <div id="about-us">
-    <%= lorem.sentences 25 %>
-  </div>
-  <div id="contact">
-    <%= lorem.sentences 25 %>
-  </div>
+  <section id="work">
+    <div class="wrap clearfix">
+      <%= lorem.sentences 30 %>
+    </div>
+  </section>
+  <section id="about-us">
+    <div class="wrap clearfix">
+      <%= lorem.sentences 30 %>
+    </div>
+  </section>
+  <section id="contact">
+    <div class="wrap clearfix">
+      <%= lorem.sentences 30 %>
+    </div>
+  </section>
 </div> <!-- End content wrapper -->
