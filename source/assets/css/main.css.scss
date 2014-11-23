@@ -7,6 +7,7 @@
 
 .wrap {
   @include outer-container();
+  width: 96%;
 }
 
 #container {
