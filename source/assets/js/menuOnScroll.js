@@ -1,11 +1,11 @@
 ( function($) {
-  $.navOnScroll = function(nav, options) {
+  $.menuOnScroll = function(menu, options) {
     var plugin = this,
-        $nav = $(nav),
-        navItems,
-        navItemsLength,
+        $menu = $(menu),
+        menuItems,
+        menuItemsLength,
         isTouch = 'ontouchstart' in window,
-        activeNavIndex = 0,
+        activeMenuIndex = 0,
         containerScrollTop = new Array(),
         containerHeights = new Array(),
         winHeight,
@@ -13,8 +13,8 @@
         resizeTimeout,
 
         defaults = {
-          navActiveClass: "active",
-          navSelector: ".menu-item",
+          menuActiveClass: "active",
+          menuSelector: ".menu-item",
           footerOffset: 100
         },
 
@@ -33,11 +33,11 @@
       });
     };
 
-    plugin.run= function() {
+    plugin.run = function() {
       plugin.setDimension();
-      plugin.setNavItems();
+      plugin.setMenuItems();
       plugin.setContainerScrollTop();
-      plugin.updateNavOnScroll(0); // This make sure that the first nav will be set onload.
+      plugin.updateMenuOnScroll(0); // This make sure that the first nav will be set onload.
       plugin.windowOnScroll();
     };
 
@@ -50,32 +50,34 @@
     };
 
     plugin.touchScroll = function() {
-      $(window).on("touchmove", function() {
-        var scrollTop = $(this).scrollTop();
-        plugin.updateNavOnScroll(scrollTop);
+      $(window).on({
+        "touchmove": function() {
+          var scrollTop = $(this).scrollTop();
+          plugin.updateMenuOnScroll(scrollTop);
+        }
       });
     };
 
     plugin.mouseScroll = function() {
       $(window).on("scroll", function() {
         var scrollTop = $(this).scrollTop();
-        plugin.updateNavOnScroll(scrollTop);
+        plugin.updateMenuOnScroll(scrollTop);
       });
     };
 
-    plugin.updateNavOnScroll = function(scrollTop) {
-      plugin.setActiveNavIndex(scrollTop);
-      $nav.find("."+settings.navActiveClass).removeClass(settings.navActiveClass);
-      $(navItems[activeNavIndex]).addClass(settings.navActiveClass);
+    plugin.updateMenuOnScroll = function(scrollTop) {
+      plugin.setActiveMenuIndex(scrollTop);
+      $menu.find("."+settings.menuActiveClass).removeClass(settings.menuActiveClass);
+      $(menuItems[activeMenuIndex]).addClass(settings.menuActiveClass);
     };
 
     // ===================================================
     // Plugin Utility Setters/Getters
     // ===================================================
 
-    plugin.setNavItems = function() {
-      navItems = $(settings.navSelector);
-      navItemsLength = navItems.length;
+    plugin.setMenuItems = function() {
+      menuItems = $(settings.menuSelector);
+      menuItemsLength = menuItems.length;
     };
 
     plugin.setDimension = function() {
@@ -84,34 +86,34 @@
     };
 
     plugin.setContainerScrollTop = function() {
-      for (var i = 0; i < navItemsLength; i++) {
-        var sectionId = $(navItems[i]).find("a").attr("href");
+      for (var i = 0; i < menuItemsLength; i++) {
+        var sectionId = $(menuItems[i]).find("a").attr("href");
         containerHeights[i] = $(sectionId).outerHeight();
         containerScrollTop[i] = (i === 0) ? 0 : containerHeights[i-1] + containerScrollTop[i-1];
       }
     };
 
-    plugin.setActiveNavIndex = function(scrollTop) {
-      for (var i = 0; i < navItemsLength; i++) {
+    plugin.setActiveMenuIndex = function(scrollTop) {
+      for (var i = 0; i < menuItemsLength; i++) {
         if ( scrollTop + winHeight > docHeight - settings.footerOffset ) {
-          activeNavIndex = navItemsLength - 1;
+          activeMenuIndex = menuItemsLength - 1;
           break;
         }
         else if (scrollTop >= containerScrollTop[i] && scrollTop < containerScrollTop[i+1]) {
-          activeNavIndex = i;
+          activeMenuIndex = i;
           break;
         }
         else {
-          activeNavIndex = navItemsLength - 1;
+          activeMenuIndex = menuItemsLength - 1;
         }
       }
     };
   };
 
-  $.fn.navOnScroll = function(options) {
+  $.fn.menuOnScroll = function(options) {
     return this.each(function() {
       var $this = $(this);
-      plugin = new $.navOnScroll(this, options);
+      plugin = new $.menuOnScroll(this, options);
       plugin.init();
     });
   };

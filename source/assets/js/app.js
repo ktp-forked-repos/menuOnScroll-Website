@@ -1,5 +1,5 @@
 /*
  *= require jquery/dist/jquery.min.js
- *= require navigationOnScroll.js
+ *= require menuOnScroll.js
  *= require main.js
  */
