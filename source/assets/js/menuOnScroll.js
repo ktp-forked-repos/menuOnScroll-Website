@@ -117,11 +117,11 @@
 
     plugin.setActiveMenuIndex = function(scrollTop) {
       for (var i = 0; i < menuItemsLength; i++) {
-        if ( scrollTop + winHeight > docHeight - settings.footerOffset ) {
-          activeMenuIndex = menuItemsLength - 1;
-          break;
-        }
-        else if (scrollTop >= containerScrollTop[i] && scrollTop < containerScrollTop[i+1]) {
+        // if ( scrollTop + winHeight > docHeight - settings.footerOffset ) {
+        //   activeMenuIndex = menuItemsLength - 1;
+        //   break;
+        // }
+        if (scrollTop >= containerScrollTop[i] && scrollTop < containerScrollTop[i+1]) {
           activeMenuIndex = i;
           break;
         }
