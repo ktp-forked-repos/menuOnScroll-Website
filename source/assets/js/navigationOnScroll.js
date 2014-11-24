@@ -2,7 +2,7 @@
   $.navOnScroll = function(nav, options) {
     var plugin = this,
         $nav = $(nav),
-        $navItems,
+        navItems,
         navItemsLength,
         isTouch = 'ontouchstart' in window,
         activeNavIndex = 0,
@@ -10,6 +10,7 @@
         containerHeights = new Array(),
         winHeight,
         docHeight,
+        resizeTimeout,
 
         defaults = {
           navActiveClass: "active",
@@ -26,36 +27,68 @@
     };
 
     plugin.onResizeDone = function() {
-
+      $(window).on("resize", function() {
+        clearTimeout(resizeTimeout);
+        resizeTimout = setTimeout(plugin.run(), 300);
+      });
     };
 
     plugin.run= function() {
       plugin.setDimension();
       plugin.setNavItems();
-
+      plugin.setContainerScrollTop();
+      plugin.updateNavOnScroll(0); // This make sure that the first nav will be set onload.
+      plugin.windowOnScroll();
     };
 
+    // ===================================================
+    // Plugin Actions
+    // ===================================================
+
+    plugin.windowOnScroll = function() {
+      (isTouch === true) ? plugin.touchScroll() : plugin.mouseScroll();
+    };
+
+    plugin.touchScroll = function() {
+      $(window).on("touchmove", function() {
+        var scrollTop = $(this).scrollTop();
+        plugin.updateNavOnScroll(scrollTop);
+      });
+    };
+
+    plugin.mouseScroll = function() {
+      $(window).on("scroll", function() {
+        var scrollTop = $(this).scrollTop();
+        plugin.updateNavOnScroll(scrollTop);
+      });
+    };
+
+    plugin.updateNavOnScroll = function(scrollTop) {
+      plugin.setActiveNavIndex(scrollTop);
+      $nav.find("."+settings.navActiveClass).removeClass(settings.navActiveClass);
+      $(navItems[activeNavIndex]).addClass(settings.navActiveClass);
+    };
+
+    // ===================================================
+    // Plugin Utility Setters/Getters
+    // ===================================================
+
     plugin.setNavItems = function() {
-      $navItems = $(settings.navSelector);
-      navItemsLength = $navItems.length;
+      navItems = $(settings.navSelector);
+      navItemsLength = navItems.length;
     };
 
     plugin.setDimension = function() {
-      windowHeight = $(window).height();
+      winHeight = $(window).height();
       docHeight = $(document).height();
-      console.log(windowHeight);
     };
 
     plugin.setContainerScrollTop = function() {
       for (var i = 0; i < navItemsLength; i++) {
-        var sectionId = $navItems[i].find("a").attr("href");
+        var sectionId = $(navItems[i]).find("a").attr("href");
         containerHeights[i] = $(sectionId).outerHeight();
-        plugin.setContainerScrollTop(i);
+        containerScrollTop[i] = (i === 0) ? 0 : containerHeights[i-1] + containerScrollTop[i-1];
       }
-    };
-
-    plugin.setContainerScrollTopOffset = function(index) {
-      containerScrollTop[index] = (index === 0) ? 0 : containerScrollTop[index - 1] + containerHeights[index];
     };
 
     plugin.setActiveNavIndex = function(scrollTop) {
@@ -66,6 +99,7 @@
         }
         else if (scrollTop >= containerScrollTop[i] && scrollTop < containerScrollTop[i+1]) {
           activeNavIndex = i;
+          break;
         }
         else {
           activeNavIndex = navItemsLength - 1;
