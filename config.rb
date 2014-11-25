@@ -22,6 +22,8 @@ after_configuration do
   sprockets.append_path File.join "#{root}", @bower_config["directory"]
 end
 
+activate :syntax
+
 # Build-specific configuration
 configure :build do
 

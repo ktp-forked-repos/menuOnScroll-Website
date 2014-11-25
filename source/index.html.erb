@@ -2,30 +2,120 @@
 title: jQuery Header on Scroll 
 ---
 
-<div id="header">
-  <div class="inner-header wrap clearfix">
+<div id="navigation">
+  <div class="inner-navigation wrap clearfix">
     <ul id="menus">
-      <li class="menu-item"><a href="#work">Work</a></li>
-      <li class="menu-item"><a href="#about-us">About Us</a></li>
-      <li class="menu-item"><a href="#contact">Contact</a></li>
+      <li class="menu-item"><a href="#intro">Introduction</a></li>
+      <li class="menu-item"><a href="#installation">Installation</a></li>
+      <li class="menu-item"><a href="#options">Options</a></li>
     </ul>
   </div>
 </div>
 
 <div id="container">
-  <section id="work">
+  <section id="intro">
     <div class="wrap clearfix">
-      <%= lorem.sentences 40 %>
+      <h1>menuOnScroll</h1>
+      <h3>A jQuery plugin that automatically updates navigation when scroll</h3>
+      <a href="#"><img src="assets/img/download_icon.png" alt="Download Plugin"></a>
     </div>
   </section>
-  <section id="about-us">
+  <section id="installation">
     <div class="wrap clearfix">
-      <%= lorem.sentences 50 %>
+      <h2 class="no-margin-bottom no-margin-top">Installation</h2>
+      <p>Download the source code here, and follow two simple steps as below. That is it!</p>
+      <div class="installation-guide-wrapper clearfix">
+        <div class="installation-guide">
+          <h3>Javascript</h3>
+          <p>Include jQuery 1.8+ and the menuOnScroll plugin either in the footer or header of your website.</p>
+          <p>You can then initialize the plugin right after the document is ready.</p>
+        </div>
+        <div class="installation-illustration">
+          <pre>
+  &lt;script src="path/to/jquery.js"&gt;&lt;/script&gt;
+  &lt;script src="path/to/jquery.menuOnScroll.js"&gt;&lt;/script&gt;
+  &lt;script&gt;
+    $(document).ready(function() {
+      $("#menu").menuOnScroll();
+    });
+  &lt;/script&gt;
+          </pre>
+        </div>
+      </div>
+      <div class="installation-guide-wrapper clearfix">
+        <div class="installation-guide">
+          <h3>HTML</h3>
+          <p>You have full control of what element you want to use for this plugin. However, it's designed specifically for the navigation of one-page website. Like this site!</p>
+        </div>
+        <div class="installation-illustration">
+          <pre>
+&lt;ul id="menus"&gt;
+  &lt;li class="menu-item"&gt;
+    &lt;a href="#introduction"&gt;Introduction&lt;/a&gt;
+  &lt;/li&gt;
+  &lt;li class="menu-item"&gt;
+    &lt;a href="#installation"&gt;Installation&lt;/a&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;div id="container"&gt;
+  &lt;div id="introduction"&gt;...&lt;/div&gt;
+  &lt;div id="installation"&gt;...&lt;/div&gt;
+&lt;/div&gt;
+        </pre>
+        </div>
+      </div>
     </div>
   </section>
-  <section id="contact">
+  <section id="options">
     <div class="wrap clearfix">
-      <%= lorem.sentences 60 %>
+      <h2 class="no-margin-bottom">Options</h2>
+      <p>The plugin requires no extra configuration if you follow the HTML markup above. However, it still offers the flexibility that you can configure to meet your requirements.</p> 
+      <div class="option">
+        <h3 class="no-margin-bottom">menuActiveClass</h3>
+        <p>
+          Type: <code>String</code><br/>
+          Default: <code>"active"</code>
+        </p>
+        <p>The class that attaches to the menu item when it's active.</p>
+      </div>
+
+      <div class="option">
+        <h3 class="no-margin-bottom">menuSelector</h3>
+        <p>
+          Type: <code>Class Selector</code><br/>
+          Default: <code>".menu-item"</code>
+        </p>
+        <p>The class name of the menu item.</p>
+      </div>
+
+      <div class="option">
+        <h3 class="no-margin-bottom">headerOffset</h3>
+        <p>
+          Type: <code>Number</code><br/>
+          Default: <code>0</code>
+        </p>
+        <p>The height of the fixed header</p> 
+      </div>
+
+      <div class="option">
+        <h3 class="no-margin-bottom">footerOffset</h3>
+        <p>
+          Type: <code>Number</code><br/>
+          Default: <code>0</code>
+        </p>
+        <p>The offset value of footer (if has one), this is used when you want to notify the position of last menu item from the bottom of the page.</p>
+      </div>
+
+      <div class="option">
+        <h3 class="no-margin-bottom">scrollOnClickOffset</h3>
+        <p>
+          Type: <code>Number</code><br/>
+          Default: <code>80</code>
+        </p>
+        <p>The offset value used for scroll to element when the menu item is clicked.</p>
+      </div>
     </div>
   </section>
 </div> <!-- End content wrapper -->
+<%= partial "footer" %>

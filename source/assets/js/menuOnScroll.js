@@ -15,8 +15,9 @@
         defaults = {
           menuActiveClass: "active",
           menuSelector: ".menu-item",
-          footerOffset: 100,
-          scrollOnClickOffset: 40
+          footerOffset: 0,
+          headerOffset: 0,
+          scrollOnClickOffset: 80
         },
 
         settings;
@@ -55,7 +56,8 @@
       $(window).on({
         "touchmove": function() {
           var scrollTop = $(this).scrollTop();
-          plugin.updateMenuOnScroll(scrollTop);
+          if (scrollTop >= 0)
+            plugin.updateMenuOnScroll(scrollTop);
         }
       });
     };
@@ -63,7 +65,8 @@
     plugin.mouseScroll = function() {
       $(window).on("scroll", function() {
         var scrollTop = $(this).scrollTop();
-        plugin.updateMenuOnScroll(scrollTop);
+        if (scrollTop >= 0)
+          plugin.updateMenuOnScroll(scrollTop);
       });
     };
 
@@ -116,12 +119,13 @@
     };
 
     plugin.setActiveMenuIndex = function(scrollTop) {
+      scrollTop = settings.headerOffset + scrollTop;
       for (var i = 0; i < menuItemsLength; i++) {
-        // if ( scrollTop + winHeight > docHeight - settings.footerOffset ) {
-        //   activeMenuIndex = menuItemsLength - 1;
-        //   break;
-        // }
-        if (scrollTop >= containerScrollTop[i] && scrollTop < containerScrollTop[i+1]) {
+        if ( scrollTop + winHeight > docHeight - settings.footerOffset ) {
+          activeMenuIndex = menuItemsLength - 1;
+          break;
+        }
+        else if (scrollTop >= containerScrollTop[i] && scrollTop < containerScrollTop[i+1]) {
           activeMenuIndex = i;
           break;
         }

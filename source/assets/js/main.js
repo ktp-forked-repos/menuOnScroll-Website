@@ -1,3 +1,6 @@
 jQuery(document).ready(function($) {
-  $("#menus").menuOnScroll();
+  $("#menus").menuOnScroll({
+    headerOffset: 60,
+    footerOffset: 30
+  });
 });
