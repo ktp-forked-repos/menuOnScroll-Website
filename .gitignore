@@ -10,6 +10,8 @@
 # Ignore the build directory
 /build
 
+/config.rb
+
 # Ignore Sass' cache
 /.sass-cache
 
@@ -18,3 +20,5 @@
 
 # Ignore components directory. Will need to change this if you change bower's install path
 /bower_components
+
+config.rb
