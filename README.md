@@ -1,4 +1,6 @@
-Header On Scroll - jQuery Plugin
+menu On Scroll - jQuery Plugin
 ---
 
-Still under development. Stay tuned!
+A jQuery plugin that automatically updates navigation when scroll
+
+Visit the demo website at [www.menuonscroll.com](http://www.menuonscroll.com)
