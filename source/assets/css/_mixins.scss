@@ -1,0 +1,28 @@
+// 1120px
+@mixin bp-xlarge {
+  @media only screen and (min-width: 80em) {
+    @content;
+  }
+}
+
+
+// 960px
+@mixin bp-large {
+   @media only screen and (min-width: 64em) {
+     @content;
+   }
+ }
+
+ // 640px
+ @mixin bp-medium {
+   @media only screen and (min-width: 40em) {
+     @content;
+   }
+ }
+
+ //480px @font-size 16px
+ @mixin bp-small {
+   @media only screen and (min-width: 30em) {
+     @content;
+   }
+ }
